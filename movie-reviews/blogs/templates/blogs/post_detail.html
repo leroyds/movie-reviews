@@ -6,13 +6,14 @@
 {% endblock %}
 
 {%  block content %}
-<div class="align-middle ">
-    <p class='display-1 text-center'>{{post.title}}</p>
-    <img src="{{post.image.url}}" alt="" class="img-fluid">
-    <p></p>
-    {{post.description}}
-        
-    {{post.release_date}}
+<p class="display-5"><a href="{% url 'post:list'%}">Back</a> </p>
+<p class='display-1 text-center'>{{post.title}}</p>
+<div class="row">
+    <img src="{{post.image.url}}" alt="" class="">
+    <div class="col-8">
+        <p class="lead">{{post.description}}</p>
+        <p class="font-italic">Release date: {{post.release_date}}</p> 
+    </div>       
 </div>
-    
+
 {% endblock %}
