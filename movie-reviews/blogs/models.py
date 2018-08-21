@@ -13,7 +13,6 @@ class Post(models.Model):
     description = models.TextField(blank=True,default='')
     release_date = models.DateTimeField(blank=True)
     language = models.CharField(default='', max_length=100)
-    genre = models.CharField(default='', max_length=100)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     status = models.CharField(default='A', max_length=50,choices=POST_STATUS)
@@ -41,7 +40,7 @@ class Comment(models.Model):
     updated_date = models.DateTimeField(auto_now=True)
     comment_status = models.BooleanField(default=True)
     
-    
+
     class Meta:
     	ordering=['-updated_date','-ratings']
 	
