@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block title %}Movie Reviews{% endblock %}
+
+{% block content %}
+    <div class='row'></div>
+    {% for post in post_list %}
+        <div class="col-4 my-4">
+            <h3 class="">{{post.title}}</h3>
+            <img src="{{post.image.url}}" alt="article image">
+            <p class="">Release Date: {{post.release_date}}</p>
+            <p>Ratings:0/5</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+<!-- <div class="row">
+        {%for article in articles%}
+            <div class='col-4 my-4'>
+                <h1 class='display-5'><a href="{% url 'articles:detail' slug=article.slug %}">{{article.title}}</a></h1>
+                <p>{{article.body|truncatewords:10}}</p>
+                <h6>{{article.date}}</h6>
+            </div>
+        {%endfor%}
+    </div> -->
