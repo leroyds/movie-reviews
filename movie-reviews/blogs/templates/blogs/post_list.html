@@ -6,13 +6,13 @@
     <div class='row'>
     {% for post in post_list %}
         <div class="col-4 my-4 border">
-            <h3 class=""><a href="{% url 'post:detail' slug=post.slug%}">{{post.title}}</a></h3>
+            <h3 class=""><a href="{{ post.get_absolute_url }}">{{post.title}}</a></h3>
             <img src="{{post.image.url}}" alt="article image">
             <p class="">Release Date: {{post.release_date}}</p>
             <p>Ratings:0/5</p>
             <p>Genre: 
                     {% for tag in post.tags.all %}
-                    <a href="{% url 'post:detail' tag.slug %}">
+                    <a href="{% url 'post:detail' slug=tag.slug %}">
                     {{ tag.name }}
                     </a>
                     {% if not forloop.last %}, {% endif %}
