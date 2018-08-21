@@ -5,3 +5,5 @@ from . import models
 
 class MovieList(ListView):
     model = models.Post
+    paginate_by=6
+

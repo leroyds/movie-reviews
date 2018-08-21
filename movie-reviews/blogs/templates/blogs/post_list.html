@@ -3,7 +3,7 @@
 {% block title %}Movie Reviews{% endblock %}
 
 {% block content %}
-    <div class='row'></div>
+    <div class='row'>
     {% for post in post_list %}
         <div class="col-4 my-4">
             <h3 class="">{{post.title}}</h3>
@@ -12,6 +12,8 @@
             <p>Ratings:0/5</p>
         </div>
     {% endfor %}
+    </div>
+    {%include 'pagination.html' with page=page_obj%}
 {% endblock %}
 
 <!-- <div class="row">
