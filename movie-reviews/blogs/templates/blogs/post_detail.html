@@ -1,20 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 
+<!-- title  block -->
+
 {% block title %}
     {{post.title}}
 {% endblock %}
 
+<!-- end of title block -->
+
+
 {%  block content %}
-<p class="display-5"><a href="{% url 'post:list'%}">Back</a> </p>
-<p class='display-1 text-center'>{{post.title}}</p>
-<div class="row">
-    <img src="{{post.image.url}}" alt="" class="">
-    <div class="col-8">
-        <p class="lead">{{post.description}}</p>
-        <p class="font-italic">Release date: {{post.release_date}}</p> 
-    </div>       
+
+<!-- movie detail -->
+<div>
+	<p class="display-5"><a href="{% url 'post:list'%}">Back</a> </p>
+	<p class='display-1 text-center'>{{post.title}}</p>
+	<div class="row">
+		<img src="{{post.image.url}}" alt="" class="">
+		<div class="col-8">
+			<p class="lead">{{post.description}}</p>
+			<p class="font-italic">Release date: {{post.release_date}}</p> 
+		</div>       
+	</div>
 </div>
+<!-- end of movie detail block -->
+
+<hr>
 
 {% with comments.count as comment_count%}
 <p>{{comment_count}} comment{{comment_count|pluralize}} </p>
@@ -37,6 +49,8 @@
 <h3>Your comment has been added.</h3>
 {%endif%}
 
+<hr>
+
 <div>
     <h2>Add a new comment</h2>
 	<form method="post" action="{{post.get_absolute_url}}">
@@ -45,6 +59,10 @@
 		<p><input type="submit" value="Add Comment"></p>
 	</form>
 </div>
+
+<hr>
+
+<!-- Related post -->
 
 <div class="related_post">
 	<h2>
@@ -67,5 +85,7 @@
 	</div>	
 	{%endfor%}
 </div>
+
+<!-- end of related post -->
 
 {% endblock %}
