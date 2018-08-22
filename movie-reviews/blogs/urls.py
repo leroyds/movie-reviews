@@ -9,7 +9,7 @@ app_name = 'post'
 urlpatterns = [
     path('',views.MovieList.as_view(),name='list'),
     path('post_key/<int:pk>/',views.MovieDetailView.as_view(),name='detail_pk'),
-    url(r'^post/(?P<slug>[-\w]+)/$',views.MovieDetailView.as_view(),name='detail'),
+    url(r'^post/(?P<tag_slug>[-\w]+)/$',views.MovieList.as_view(),name='list_slug'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

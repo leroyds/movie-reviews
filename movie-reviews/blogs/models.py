@@ -33,6 +33,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post_obj = models.ForeignKey(Post, related_name="post_comment", on_delete=models.CASCADE)
+    user_obj = models.ForeignKey(User,related_name='user_comment', on_delete=models.CASCADE)
     comment_title = models.CharField(max_length=255)
     ratings = models.IntegerField(default=0)
     body = models.TextField(default='')

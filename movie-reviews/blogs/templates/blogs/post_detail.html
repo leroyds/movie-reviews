@@ -16,4 +16,56 @@
     </div>       
 </div>
 
+{% with comments.count as comment_count%}
+<p>{{comment_count}} comment{{comment_count|pluralize}} </p>
+{%endwith%}
+
+{%for commentInfo in comments%}
+<div>
+	<p>
+		comment {{forloop.count}} by {{commentInfo.comment_title}} dated:{{commentInfo.updated_date}}  (Ratings:{{commentInfo.ratings}})
+	</p>
+	{{commentInfo.body|linebreaks}}
+</div>
+{%endfor%}
+
+{%if comments.empty%}
+<p>There are no comments yet.</p>
+{%endif%}
+
+{% if comment_added %}
+<h3>Your comment has been added.</h3>
+{%endif%}
+
+<div>
+    <h2>Add a new comment</h2>
+	<form method="post" action="{{post.get_absolute_url}}">
+		{{ comment_form.as_p }}
+		{% csrf_token %}
+		<p><input type="submit" value="Add Comment"></p>
+	</form>
+</div>
+
+<div class="related_post">
+	<h2>
+		SIMILAR POSTS
+	</h2>
+	{%if related_blogs.empty%}
+		There are no similar posts yet.
+    {%endif%}
+
+	{%for similar_blog in related_blogs%}
+	<div>
+        <p class="related_post">
+		<h4>
+             <a href="{{similar_blog.get_absolute_url }}">{{similar_blog.title}}</a> 
+		</h4>       Genre:
+			{%for tagInfo in similar_blog.tags.all%}
+			<a href="{%url 'post:list_slug' tag_slug=tagInfo.slug %}">{{tagInfo.name}}</a>
+			{%endfor%}
+		</p>
+	</div>	
+	{%endfor%}
+</div>
+
 {% endblock %}
