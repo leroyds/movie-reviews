@@ -17,8 +17,8 @@
 	<p class="display-5"><a href="{% url 'post:list'%}">Back</a> </p>
 	<p class='display-1 text-center'>{{post.title}}</p>
 	<div class="row">
-		<img src="{{post.image.url}}" alt="" class="">
-		<div class="col-8">
+		<img src="{{post.image.url}}" alt="" class="col-3">
+		<div class="col-9">
 			<p class="lead">{{post.description}}</p>
 			<p class="font-italic">Release date: {{post.release_date}}</p> 
 		</div>       
@@ -28,26 +28,29 @@
 
 <hr>
 
-{% with comments.count as comment_count%}
-<p>{{comment_count}} comment{{comment_count|pluralize}} </p>
-{%endwith%}
+<!-- comment section -->
 
-{%for commentInfo in comments%}
-<div>
-	<p>
-		comment {{forloop.count}} by {{commentInfo.comment_title}} dated:{{commentInfo.updated_date}}  (Ratings:{{commentInfo.ratings}})
-	</p>
-	{{commentInfo.body|linebreaks}}
-</div>
-{%endfor%}
+	<!-- comment count -->
+	<p><span class="badge badge-pill badge-light">{{comments.count}} comment{{comments.count|pluralize}}</span> </p>
 
-{%if comments.empty%}
-<p>There are no comments yet.</p>
-{%endif%}
+	<!-- comment list -->
+	{%for commentInfo in comments%}
+	<div class="col-12 border bg-light mb-1">
+		<h4 class="text-monospace">{{commentInfo.comment_title}}  <span class="badge badge-pill badge-warning">(Ratings:{{commentInfo.ratings}})</span></h4>
+		<p class="lead">{{commentInfo.body|linebreaks}}</p>
+		<p>
+			comment {{forloop.count}} by <span class="badge badge-pill badge-dark">{{commentInfo.user_obj}}</span> <span class="font-italic">dated:{{commentInfo.updated_date}}</span>  
+		</p>
+	</div>
+	{%endfor%}
 
-{% if comment_added %}
-<h3>Your comment has been added.</h3>
-{%endif%}
+	{%if comments.empty%}
+	<p>There are no comments yet.</p>
+	{%endif%}
+
+	{% if comment_added %}
+	<h3>Your comment has been added.</h3>
+	{%endif%}
 
 <hr>
 
