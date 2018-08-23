@@ -9,7 +9,7 @@ class Post(models.Model):
     POST_STATUS     ={('A','ACTIVE'),('D',"INACTIVE"),}
     title           = models.CharField(max_length=200)
     image           = models.ImageField(default='default.png',blank=True)
-    slug            = models.SlugField()
+    slug            = models.SlugField(unique=True)
     description     = models.TextField(blank=True,default='')
     release_date    = models.DateTimeField(blank=True)
     language        = models.CharField(default='', max_length=100)
@@ -43,7 +43,8 @@ class Comment(models.Model):
     
 
     class Meta:
-    	ordering=['-updated_date','-ratings']
+        ordering = ['-updated_date','-ratings']
+        unique_together = ('post_obj','user_obj')
 	
     def __str__(self):
         return 'Comment by {} on {}'.format(self.comment_title, self.post_obj)
