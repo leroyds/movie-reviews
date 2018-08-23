@@ -29,7 +29,15 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-created_date',)
-		
+
+
+class CommentManager(models.Manager):
+    def get_comment_or_empty_comment_form(self,post,user):
+        try:
+            return Comment.objects.get(post_obj=post,user_obj=user)
+        except:
+            return Comment(post_obj=post,user_obj=user)
+
 
 class Comment(models.Model):
     post_obj        = models.ForeignKey(Post, related_name="post_comment", on_delete=models.CASCADE)
@@ -40,7 +48,7 @@ class Comment(models.Model):
     created_date    = models.DateTimeField( auto_now_add=True)
     updated_date    = models.DateTimeField(auto_now=True)
     comment_status  = models.BooleanField(default=True)
-    
+    objects=CommentManager()
 
     class Meta:
         ordering = ['-updated_date','-ratings']
